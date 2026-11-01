@@ -1,3 +1,4 @@
+import { createMusicPlayer } from "./music.js";
 import {
   positions,
   levels,
@@ -18,6 +19,11 @@ let state = createState(),
   clock = 0,
   queue = [];
 let situation = situations[$("#speed").value];
+const music = createMusicPlayer(
+  $("#music"),
+  $("#music-status"),
+  $("#speed").value,
+);
 const nodes = new Map(),
   sounds = {},
   activeAudio = new Set();
@@ -225,7 +231,7 @@ $("#auto").onclick = () => {
 };
 $("#sound").onclick = () => {
   enabledSound = !enabledSound;
-  $("#sound").textContent = enabledSound ? "Ton an" : "Ton aus";
+  $("#sound").textContent = enabledSound ? "Effekte an" : "Effekte aus";
   $("#sound").setAttribute("aria-pressed", enabledSound);
   if (enabledSound) sound("bonk");
   else {
@@ -294,6 +300,7 @@ function describeSituation() {
 }
 $("#speed").addEventListener("change", () => {
   situation = situations[$("#speed").value];
+  music.setSituation($("#speed").value);
   clearActivity();
   describeSituation();
   if (!automatic) return;

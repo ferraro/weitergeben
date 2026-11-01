@@ -21,7 +21,8 @@ Führungsstil und bezieht sich auf keine reale Person oder Organisation.
   Bereits gestartete Kaskaden laufen dabei noch zu Ende.
 - Drei Betriebssituationen verändern Tempo, Auslöser und Zielverteilung: Normaler Arbeitstag, Quartalsendspurt, Krisenmodus. Beim Umschalten stoppt die alte Kaskade; die Treffer bleiben erhalten. Bei laufender Automatik zeigt ein sofortiger Beispielimpuls die neue Situation, im pausierten Zustand bleibt sie pausiert.
 - „Druck nach oben melden“ schickt Feedback auf seinen tragikomischen Dienstweg.
-- „Ton an“ aktiviert drei eigens mit ElevenLabs erzeugte Cartoon-Effekte.
+- „Effekte an“ aktiviert drei eigens mit ElevenLabs erzeugte Cartoon-Effekte.
+- „♫ Musik an“ aktiviert drei instrumentale Suno-Stücke. Die Musik folgt der Betriebssituation mit einer 1,4-sekündigen Überblendung und läuft unabhängig von den Effekten. Versteckte Tabs pausieren die Musik.
 - ↺ setzt Treffer, laufende Kaskaden und Beschwerden zurück. Einstellungen bleiben.
 
 Die Statistik vergleicht Ø Bonks pro Person je Job-Kategorie (Treffersumme geteilt durch 1, 2, 4 bzw. 20 Personen). Die Balken verwenden diese Durchschnitte; der Gesamtzähler zählt weiterhin alle Treffer.
@@ -61,7 +62,7 @@ Klickkaskade, Beschwerden, Reset, MP3-Wiedergabe und ein mobiler Viewport im
 Browser geprüft.
 
 Für statisches Hosting genügen `index.html`, `style.css`, `app.js`, `engine.js`,
-`forschung.html`, `favicon.svg` und `assets/audio/*.mp3`. Es ist kein Backend nötig.
+`music.js`, `forschung.html`, `favicon.svg`, `assets/audio/*.mp3` und `assets/music/*.mp3`. Es ist kein Backend nötig.
 
 ## Mitmachen
 
@@ -73,6 +74,7 @@ keine realen Personen, Firmenlogos oder konkrete Arbeitgeber nachbilden.
 Quellcode, SVG-Grafiken und Dokumentation: [MIT](LICENSE).
 Die mit ElevenLabs erzeugten Sounds sind gesondert dokumentiert:
 [Herkunft und Prompts](assets/audio/README.md).
+Musik: Suno, siehe [Musik-Herkunft und Prompts](assets/music/README.md).
 
 ## Textvorschlag für X
 

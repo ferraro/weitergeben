@@ -1038,3 +1038,21 @@ body:has(.workspace) > footer {
   font-size: clamp(6px, 0.65cqw, 10px);
   white-space: normal;
 }
+.music-status {
+  color: #67736b;
+  font-size: 12px;
+  line-height: 1.5;
+}
+.controls,
+.control-group {
+  flex-wrap: wrap;
+}
+
+/* Keep speech bubbles above the top row inside the clipped chart viewport. */
+.stage-scroll {
+  padding-top: 56px;
+}
+.stage-scroll .bubble {
+  top: auto;
+  bottom: calc(100% + 6px);
+}

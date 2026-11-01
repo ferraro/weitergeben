@@ -21,4 +21,5 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 Scope: application source code, SVG artwork, and documentation. Generated
-MP3 audio assets are documented separately in assets/audio/README.md.
+MP3 audio assets are documented separately in assets/audio/README.md and
+assets/music/README.md.
