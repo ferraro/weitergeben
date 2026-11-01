@@ -26,6 +26,10 @@ Führungsstil und bezieht sich auf keine reale Person oder Organisation.
 
 Die Statistik vergleicht Ø Bonks pro Person je Job-Kategorie (Treffersumme geteilt durch 1, 2, 4 bzw. 20 Personen). Die Balken verwenden diese Durchschnitte; der Gesamtzähler zählt weiterhin alle Treffer.
 
+## Forschung und Modellannahmen
+
+Die zweite Seite [Forschung & Quellen](forschung.html) erläutert die wissenschaftlichen Bezüge, verlinkt die Studien und dokumentiert sämtliche Ereigniswahrscheinlichkeiten als Spielannahmen. Die Demo liefert keine empirisch gemessenen Belastungswerte.
+
 ## Lokal starten
 
 Node.js 22 oder neuer, keine Installation und keine API-Schlüssel erforderlich:
@@ -57,7 +61,7 @@ Klickkaskade, Beschwerden, Reset, MP3-Wiedergabe und ein mobiler Viewport im
 Browser geprüft.
 
 Für statisches Hosting genügen `index.html`, `style.css`, `app.js`, `engine.js`,
-`favicon.svg` und `assets/audio/*.mp3`. Es ist kein Backend nötig.
+`forschung.html`, `favicon.svg` und `assets/audio/*.mp3`. Es ist kein Backend nötig.
 
 ## Mitmachen
 
@@ -73,5 +77,5 @@ Die mit ElevenLabs erzeugten Sounds sind gesondert dokumentiert:
 ## Textvorschlag für X
 
 > Ich habe einen kleinen Browser-Simulator über autoritären Managementstil gebaut:
-> Oben ein Impuls, unten acht Bonks. Beschwerden nach oben? Landen in Ablage P. 🐒
+> Oben ein Klick, unten eine ganze Bonk-Kaskade. Beschwerden nach oben? Landen in Ablage P. 🐒
 > Fiktive Firma, Open Source: https://github.com/ferraro/weitergeben
