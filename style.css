@@ -968,63 +968,12 @@ footer {
   background-color: #edddd3;
 }
 
-/* Give the organisation chart the full viewport; statistics live below it. */
+/* Compact chart with the statistics alongside it. */
 body:has(.workspace) > header,
 body:has(.workspace) > main,
 body:has(.workspace) > footer {
-  width: calc(100% - 32px);
-  max-width: none;
-}
-.workspace {
-  grid-template-columns: minmax(0, 1fr);
-}
-.workspace aside {
-  border-left: 0;
-  border-top: 1px solid #cdd2c6;
-  display: grid;
-  grid-template-columns: 200px minmax(300px, 1fr) minmax(200px, 300px);
-  column-gap: 32px;
-  align-items: start;
-}
-.workspace .panel-heading {
-  grid-column: 1;
-  grid-row: 1;
-}
-.workspace aside h2 {
-  grid-column: 1;
-  grid-row: 2;
-  margin-top: 4px;
-}
-.workspace aside > .muted {
-  grid-column: 1;
-  grid-row: 3;
-}
-.workspace .total {
-  grid-column: 1;
-  grid-row: 4 / 7;
-  margin: 16px 0 0;
-}
-.workspace .stats-caption {
-  grid-column: 2;
-  grid-row: 1;
-  margin: 8px 0;
-}
-.workspace #stats {
-  grid-column: 2;
-  grid-row: 2 / 7;
-}
-.workspace .feedback-stat {
-  grid-column: 3;
-  grid-row: 1;
-  margin: 0;
-}
-.workspace .aside-quote {
-  grid-column: 3;
-  grid-row: 2 / 4;
-}
-.workspace .report-status {
-  grid-column: 3;
-  grid-row: 4 / 7;
+  width: calc(100% - 48px);
+  max-width: 1600px;
 }
 .stage-scroll .stage {
   min-width: 0;
@@ -1033,26 +982,12 @@ body:has(.workspace) > footer {
 .stage-scroll .team-member {
   width: min(84px, 3.5%);
 }
-@media (max-width: 800px) {
-  .workspace aside {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: 12px 20px;
+@media (max-width: 700px) {
+  body:has(.workspace) > header,
+  body:has(.workspace) > main,
+  body:has(.workspace) > footer {
+    width: calc(100% - 24px);
   }
-  .workspace .feedback-stat {
-    grid-column: 1;
-    grid-row: 7;
-  }
-  .workspace .aside-quote {
-    grid-column: 2;
-    grid-row: 7;
-    margin: 0;
-  }
-  .workspace .report-status {
-    grid-column: 1 / -1;
-    grid-row: 8;
-  }
-}
-@media (max-width: 600px) {
   .stage-scroll .monkey {
     width: 56px;
   }
@@ -1066,10 +1001,40 @@ body:has(.workspace) > footer {
     font-size: 7px;
     padding: 1px 2px;
   }
-  .stage-scroll .customer {
-    left: 15%;
-  }
-  .stage-scroll .banker {
-    left: 85%;
-  }
+}
+
+/* Scale every character with the available chart width. */
+.stage-scroll {
+  container-type: inline-size;
+}
+.stage-scroll .stage {
+  height: clamp(320px, 48cqw, 660px);
+}
+.stage-scroll .monkey {
+  width: 7.5%;
+  height: auto;
+}
+.stage-scroll .team-member {
+  width: 3.5%;
+}
+.stage-scroll .monkey svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.stage-scroll .monkey .name {
+  font-size: clamp(6px, 0.75cqw, 11px);
+}
+.stage-scroll .team-member .name {
+  font-size: clamp(4px, 0.6cqw, 9px);
+}
+.stage-scroll .monkey .count {
+  font-size: clamp(6px, 0.85cqw, 12px);
+  padding: 0.15cqw 0.35cqw;
+  top: 0;
+  right: 0;
+}
+.stage-scroll .customer-hint {
+  font-size: clamp(6px, 0.65cqw, 10px);
+  white-space: normal;
 }
