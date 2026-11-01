@@ -799,17 +799,28 @@ footer {
   outline-offset: -3px;
 }
 .stage-scroll .stage {
-  min-width: 1200px;
-  height: 560px;
+  min-width: 2400px;
+  height: 620px;
+}
+.stage-scroll .monkey {
+  width: 96px;
+  height: 116px;
 }
 .stage-scroll .team-member {
-  height: 80px;
+  width: 84px;
+  height: 116px;
 }
-.stage-scroll .team-member svg {
-  height: 64px;
+.stage-scroll .monkey svg {
+  height: 96px;
 }
-.stage-scroll .team-member .name {
-  font-size: 7px;
+.stage-scroll .monkey .name {
+  font-size: 10px;
+}
+.stage-scroll .monkey .count {
+  font-size: 12px;
+  padding: 2px 5px;
+  top: 0;
+  right: 0;
 }
 .stage-scroll .t1 {
   top: 26%;
