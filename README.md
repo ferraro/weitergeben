@@ -21,8 +21,8 @@ Führungsstil und bezieht sich auf keine reale Person oder Organisation.
   Bereits gestartete Kaskaden laufen dabei noch zu Ende.
 - Drei Betriebssituationen verändern Tempo, Auslöser und Zielverteilung: Normaler Arbeitstag, Quartalsendspurt, Krisenmodus. Beim Umschalten stoppt die alte Kaskade; die Treffer bleiben erhalten. Bei laufender Automatik zeigt ein sofortiger Beispielimpuls die neue Situation, im pausierten Zustand bleibt sie pausiert.
 - „Druck nach oben melden“ schickt Feedback auf seinen tragikomischen Dienstweg.
-- „Effekte an“ aktiviert drei eigens mit ElevenLabs erzeugte Cartoon-Effekte.
-- „♫ Musik an“ aktiviert drei instrumentale Suno-Stücke. Die Musik folgt der Betriebssituation mit einer 1,4-sekündigen Überblendung und läuft unabhängig von den Effekten. Versteckte Tabs pausieren die Musik.
+- Drei eigens mit ElevenLabs erzeugte Cartoon-Effekte sind standardmäßig eingeschaltet und separat abschaltbar.
+- Drei instrumentale Suno-Stücke sind standardmäßig eingeschaltet und separat abschaltbar. Die Musik folgt der Betriebssituation mit einer 1,4-sekündigen Überblendung und läuft unabhängig von den Effekten. Versteckte Tabs pausieren die Musik.
 - ↺ setzt Treffer, laufende Kaskaden und Beschwerden zurück. Einstellungen bleiben.
 
 Die Statistik vergleicht Ø Bonks pro Person je Job-Kategorie (Treffersumme geteilt durch 1, 2, 4 bzw. 20 Personen). Die Balken verwenden diese Durchschnitte; der Gesamtzähler zählt weiterhin alle Treffer.
@@ -48,7 +48,7 @@ verwenden. Der Entwicklungsserver bindet ausschließlich an localhost.
 
 HTML, CSS, JavaScript-Module und selbst gezeichnete, animierbare SVG-Figuren.
 Kein Framework, kein Build, keine Laufzeitabhängigkeiten, keine externen Fonts,
-kein Tracking, keine Anmeldung. Sound startet aus; Browser-Tabs im Hintergrund
+kein Tracking, keine Anmeldung. Musik und Effekte starten eingeschaltet; blockiert der Browser die automatische Wiedergabe, startet Musik nach dem ersten Klick oder Tastendruck. Browser-Tabs im Hintergrund
 pausieren die Simulation. Die Darstellung berücksichtigt reduzierte Bewegung.
 
 ```sh

@@ -1,4 +1,4 @@
-// Local Suno tracks. Nothing plays or downloads until the user enables music.
+// Enabled by default; retry after user interaction if autoplay is blocked.
 export function createMusicPlayer(button, status, initialSituation) {
   const titles = {
     everyday: "Dienst nach Vorschrift",
@@ -6,7 +6,8 @@ export function createMusicPlayer(button, status, initialSituation) {
     crisis: "Die Kreditlinie",
   };
   const tracks = new Map();
-  let enabled = false,
+  let enabled = true,
+    waitingForGesture = false,
     selected = initialSituation,
     revision = 0,
     frame;
@@ -48,6 +49,7 @@ export function createMusicPlayer(button, status, initialSituation) {
     status.textContent = `Musik lädt: ${titles[key]} …`;
     try {
       await next.play();
+      waitingForGesture = false;
       if (attempt !== revision) {
         if (!enabled || document.hidden || selected !== key) next.pause();
         return;
@@ -71,8 +73,15 @@ export function createMusicPlayer(button, status, initialSituation) {
         if (progress < 1) frame = requestAnimationFrame(fade);
       }
       frame = requestAnimationFrame(fade);
-    } catch {
+    } catch (error) {
       if (attempt !== revision) return;
+      if (error.name === "NotAllowedError") {
+        waitingForGesture = true;
+        pauseAll();
+        status.textContent =
+          "Musik ist an – startet nach dem ersten Klick oder Tastendruck.";
+        return;
+      }
       enabled = false;
       pauseAll();
       updateButton();
@@ -93,6 +102,15 @@ export function createMusicPlayer(button, status, initialSituation) {
     if (document.hidden) pauseAll();
     else if (enabled) transition();
   });
+  function unlock(event) {
+    if (event.target instanceof Element && event.target.closest("#music"))
+      return;
+    if (enabled && waitingForGesture && !document.hidden) transition();
+  }
+  document.addEventListener("click", unlock);
+  document.addEventListener("keydown", unlock);
+  updateButton();
+  transition();
   return {
     setSituation(key) {
       if (!(key in titles) || key === selected) return;

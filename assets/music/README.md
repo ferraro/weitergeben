@@ -2,7 +2,7 @@
 
 Generated for Weitergeben on 2026-11-01 with Suno, model `chirp-v5-5`, instrumental mode, requested duration 60 seconds. No reference recordings or artist imitations were supplied. Each scenario uses the first completed variant.
 
-The tracks are local files; playback requires no account or API key. They repeat with the browser's audio loop and crossfade for 1.4 seconds when the business situation changes. Playback begins only after clicking the music button.
+The tracks are local files; playback requires no account or API key. They repeat with the browser's audio loop and crossfade for 1.4 seconds when the business situation changes. Music is enabled by default. If browser autoplay policy blocks playback, it retries after a click or key press; the music button can disable it independently of effects.
 
 ## Weitergeben - Dienst nach Vorschrift
 
@@ -28,4 +28,3 @@ The tracks are local files; playback requires no account or API key. They repeat
 ## Media terms
 
 The application's MIT license covers code, not these generated media files. Suno's applicable terms govern the generated music: https://suno.com/terms . Generation provenance is recorded here; no independent open-content license is asserted for the MP3s. For a code-only distribution, omit the music assets or replace them with tracks you license separately.
-

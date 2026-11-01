@@ -13,7 +13,7 @@ import {
 const $ = (s) => document.querySelector(s);
 let state = createState(),
   automatic = true,
-  enabledSound = false,
+  enabledSound = true,
   elapsed = 0,
   previous = performance.now(),
   clock = 0,
