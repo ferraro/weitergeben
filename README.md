@@ -4,10 +4,20 @@
 
 Eine kleine interaktive 2D-Bürosatire über **autoritären Managementstil**.
 27 Cartoon-Affen, ein Kunde und ein Banker, vier Hierarchieebenen und ein sehr zuverlässiger Dienstweg
-für Druck. Der Dienstweg für Beschwerden endet dagegen in **Papierkorb**.
+für Druck. Der Dienstweg für Beschwerden endet dagegen im **Papierkorb**.
 
 Die Figuren und die Firma sind frei erfunden. Die Satire kritisiert einen
 Führungsstil und bezieht sich auf keine reale Person oder Organisation.
+
+## Screenshots
+
+Die Simulation im Quartalsendspurt: Druckkaskaden, durchschnittliche Bonks pro Job-Kategorie und ein Papierkorb voller Beschwerden.
+
+![Spielansicht mit Affen-Pyramide, Trefferstatistik rechts und gefülltem Papierkorb](docs/screenshots/spiel.png)
+
+Das Start-Overlay startet Spiel, Musik und Effekte gemeinsam.
+
+![Startbildschirm von Weitergeben mit großem Play-Button](docs/screenshots/start.png)
 
 ## Spielen
 
