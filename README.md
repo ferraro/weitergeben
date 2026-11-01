@@ -17,7 +17,7 @@ Führungsstil und bezieht sich auf keine reale Person oder Organisation.
 - Der Kunde steht außerhalb der Hierarchie. Beim Anklicken trifft er einen zufälligen Ansprechpartner, auch den Chef. Führungskräfte geben diesen Druck weiter.
 - Der Banker mit Zylinder, Monokel und Gehrock trifft ausschließlich den Chef. Von dort wird der Druck zufällig nach unten weitergereicht.
 - Auch in der Automatik kommen gelegentlich Kunden- und Bankerdruck hinzu.
-- Zufällige Impulse starten automatisch; die Automatik lässt sich pausieren.
+- Das Start-Overlay gibt mit einem Klick Musik und Effekte frei und startet die Simulation. Zufällige Impulse laufen danach automatisch; die Automatik lässt sich pausieren.
   Bereits gestartete Kaskaden laufen dabei noch zu Ende.
 - Drei Betriebssituationen verändern Tempo, Auslöser und Zielverteilung: Normaler Arbeitstag, Quartalsendspurt, Krisenmodus. Beim Umschalten stoppt die alte Kaskade; die Treffer bleiben erhalten. Bei laufender Automatik zeigt ein sofortiger Beispielimpuls die neue Situation, im pausierten Zustand bleibt sie pausiert.
 - „Druck nach oben melden“ schickt Feedback auf seinen tragikomischen Dienstweg.
@@ -48,7 +48,7 @@ verwenden. Der Entwicklungsserver bindet ausschließlich an localhost.
 
 HTML, CSS, JavaScript-Module und selbst gezeichnete, animierbare SVG-Figuren.
 Kein Framework, kein Build, keine Laufzeitabhängigkeiten, keine externen Fonts,
-kein Tracking, keine Anmeldung. Musik und Effekte starten eingeschaltet; blockiert der Browser die automatische Wiedergabe, startet der gemeinsame Audiokontext nach dem ersten Klick oder Tastendruck. Solange die Freigabe fehlt, erscheint „Ton starten“. Browser-Tabs im Hintergrund
+kein Tracking, keine Anmeldung. Musik und Effekte sind voreingeschaltet und starten mit dem Play-Button im Start-Overlay. Browser-Tabs im Hintergrund
 pausieren die Simulation. Die Darstellung berücksichtigt reduzierte Bewegung.
 
 ```sh

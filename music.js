@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // Copyright (c) 2026 ferraro
-import { audioContext, loadAudio } from "./audio.js";
+import { audioContext, loadAudio, audioStarted } from "./audio.js";
 export function createMusicPlayer(button, status, initialSituation) {
   const titles = {
     everyday: "Dienst nach Vorschrift",
@@ -23,13 +23,15 @@ export function createMusicPlayer(button, status, initialSituation) {
     button.setAttribute("aria-pressed", String(enabled));
     button.textContent = enabled ? "♫ Musik an" : "♫ Musik aus";
     if (!enabled) status.textContent = "Musik ausgeschaltet.";
+    else if (!audioStarted)
+      status.textContent = "Musik und Effekte starten mit dem Spiel.";
     else if (audioContext?.state !== "running")
       status.textContent =
-        "Ton ist eingeschaltet. Falls noch nichts zu hören ist: „Ton starten“ anklicken.";
+        "Ton ist eingeschaltet. Falls noch nichts zu hören ist, einmal ins Spiel klicken.";
   }
   async function transition() {
     const attempt = ++revision;
-    if (!enabled || document.hidden || !audioContext) {
+    if (!audioStarted || !enabled || document.hidden || !audioContext) {
       stopAll();
       describe();
       return;
@@ -93,8 +95,8 @@ export function createMusicPlayer(button, status, initialSituation) {
     describe();
     if (audioContext.state === "running" && enabled) transition();
   });
+  document.addEventListener("audioactivated", transition);
   describe();
-  transition();
   return {
     setSituation(key) {
       if (!(key in titles) || key === selected) return;

@@ -2,7 +2,7 @@
 
 Generated for Weitergeben on 2026-11-01 with Suno, model `chirp-v5-5`, instrumental mode, requested duration 60 seconds. No reference recordings or artist imitations were supplied. Each scenario uses the first completed variant.
 
-The tracks are local files; playback requires no account or API key. They repeat with the Web Audio buffer loop and crossfade for 1.4 seconds when the business situation changes. Music is enabled by default. If browser autoplay policy blocks playback, the shared audio context resumes after a click or key press (or the explicit audio-start button); the music button can disable it independently of effects.
+The tracks are local files; playback requires no account or API key. They repeat with the Web Audio buffer loop and crossfade for 1.4 seconds when the business situation changes. Music is enabled by default and starts with the game overlay’s Play button; the music button can disable it independently of effects.
 
 ## Weitergeben - Dienst nach Vorschrift
 

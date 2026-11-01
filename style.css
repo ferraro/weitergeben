@@ -1108,3 +1108,55 @@ body:has(.workspace) > footer {
     opacity: 0;
   }
 }
+.workspace {
+  position: relative;
+}
+.start-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  display: grid;
+  place-items: center;
+  background: #e5e9ddc9;
+  backdrop-filter: blur(5px);
+  padding: 24px;
+}
+.start-overlay[hidden] {
+  display: none;
+}
+.start-card {
+  text-align: center;
+}
+.start-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin: 24px auto;
+  padding: 24px 42px;
+  border: none;
+  background: #304e46;
+  color: #fff;
+  border-radius: 18px;
+  font-size: 24px;
+  font-weight: bold;
+  box-shadow: 0 8px 30px #304e4633;
+}
+.start-game span {
+  font-size: 48px;
+}
+.start-game:hover {
+  background: #41685c;
+}
+.start-card > p:not(.eyebrow) {
+  font-size: 19px;
+}
+.start-card small {
+  color: #546457;
+}
+@media (max-width: 700px) {
+  .start-overlay {
+    align-items: start;
+    padding-top: 110px;
+  }
+}

@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // Copyright (c) 2026 ferraro
-import { audioContext, loadAudio } from "./audio.js";
+import { audioContext, loadAudio, unlockAudio } from "./audio.js";
 import { createMusicPlayer } from "./music.js";
 import {
   positions,
@@ -15,7 +15,7 @@ import {
 } from "./engine.js";
 const $ = (s) => document.querySelector(s);
 let state = createState(),
-  automatic = true,
+  automatic = false,
   enabledSound = true,
   elapsed = 0,
   previous = performance.now(),
@@ -264,6 +264,19 @@ $("#auto").onclick = () => {
   elapsed = 0;
   describeSituation();
 };
+$("#start-game").addEventListener("click", () => {
+  unlockAudio().catch(() => {
+    $("#music-status").textContent =
+      "Spiel gestartet. Audio ist derzeit nicht verfügbar.";
+  });
+  $("#start-overlay").hidden = true;
+  $(".game").inert = false;
+  $("aside").inert = false;
+  $(".controls").inert = false;
+  $("#auto").click();
+  $("#auto").focus({ preventScroll: true });
+  elapsed = 0;
+});
 $("#sound").onclick = () => {
   enabledSound = !enabledSound;
   $("#sound").textContent = enabledSound ? "Effekte an" : "Effekte aus";

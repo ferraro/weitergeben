@@ -44,11 +44,29 @@
         </div>
       </section>
       <div class="workspace">
-        <section class="game" aria-label="Interaktive Management-Pyramide">
+        <div id="start-overlay" class="start-overlay">
+          <div class="start-card">
+            <p class="eyebrow">WILLKOMMEN IM ORGANIGRAMM</p>
+            <button
+              id="start-game"
+              class="start-game"
+              aria-label="Spiel starten, mit Musik und Effekten"
+            >
+              <span aria-hidden="true">▶</span>Starten
+            </button>
+            <p>Ein Klick. Der Betrieb läuft.</p>
+            <small>Mit Musik &amp; Effekten · jederzeit abschaltbar</small>
+          </div>
+        </div>
+        <section
+          inert
+          class="game"
+          aria-label="Interaktive Management-Pyramide"
+        >
           <div class="game-top">
             <span
               ><i id="status-dot"></i>
-              <b id="mode-label">DER BETRIEB LÄUFT</b></span
+              <b id="mode-label">BEREIT ZUM START</b></span
             ><span>FIKTIVE FIRMA · ECHTES PRINZIP</span>
           </div>
           <div
@@ -90,7 +108,7 @@
             ><span>4 Teams à 5. 0 Vorbilder.</span>
           </div>
         </section>
-        <aside>
+        <aside inert>
           <div class="panel-heading">
             <span class="eyebrow">DAS STIMMUNGSBILD</span><span>↙</span>
           </div>
@@ -112,10 +130,10 @@
           </p>
         </aside>
       </div>
-      <section class="controls" aria-label="Spielsteuerung">
+      <section inert class="controls" aria-label="Spielsteuerung">
         <div class="control-group">
-          <button id="auto" class="primary" aria-pressed="true">
-            Ⅱ Automatik pausieren</button
+          <button id="auto" class="primary" aria-pressed="false">
+            ▶ Automatik starten</button
           ><label class="speed"
             >Betriebssituation
             <select id="speed">
@@ -127,7 +145,6 @@
         </div>
         <div class="control-group">
           <button id="report" class="report">↑ Druck nach oben melden</button
-          ><button id="audio-start" class="primary">▶ Ton starten</button
           ><button id="sound" aria-pressed="true">Effekte an</button
           ><button id="music" aria-pressed="true">♫ Musik an</button
           ><button

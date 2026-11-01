@@ -20,30 +20,23 @@ export function loadAudio(url) {
   }
   return buffers.get(url);
 }
+export let audioStarted = false;
 export function unlockAudio() {
-  if (!audioContext)
-    return Promise.reject(new Error("Audio nicht unterstützt"));
-  return audioContext.resume();
+  audioStarted = true;
+  const result = audioContext
+    ? audioContext.resume()
+    : Promise.reject(new Error("Audio nicht unterstützt"));
+  document.dispatchEvent(new Event("audioactivated"));
+  return result;
 }
-const start = document.querySelector("#audio-start");
-function updateGate() {
-  start.hidden = audioContext?.state === "running";
-  start.textContent = audioContext
-    ? "▶ Ton starten"
-    : "Audio nicht unterstützt";
-  start.disabled = !audioContext;
-}
-start.addEventListener("click", () => unlockAudio().catch(updateGate));
 for (const event of ["pointerdown", "keydown", "click"]) {
   document.addEventListener(
     event,
     () => {
-      if (audioContext?.state === "suspended") unlockAudio().catch(updateGate);
+      if (audioStarted && audioContext?.state === "suspended") {
+        audioContext.resume().catch(() => {});
+      }
     },
     { capture: true },
   );
 }
-audioContext?.addEventListener("statechange", updateGate);
-updateGate();
-// Browsers may allow this after a reload; otherwise the gate remains visible.
-if (audioContext) unlockAudio().catch(updateGate);
