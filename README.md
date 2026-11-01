@@ -11,10 +11,11 @@ Führungsstil und bezieht sich auf keine reale Person oder Organisation.
 
 ## Spielen
 
-- Auf eine Figur klicken: Führungskräfte reichen Druck weiter; beim operativen Team endet die Kaskade.
-- Die Kaskade läuft nach unten: Ein Impuls an der Spitze bewirkt 2, 4 und 20 Treffer. Jeder der vier Teamleads führt fünf Teammitglieder.
+- Auf eine Führungskraft klicken: Eine volle Kaskade trifft alle im darunterliegenden Teilbaum; beim operativen Team endet die Weitergabe.
+- Automatische Impulse und Druck von Kunden oder Banker treffen pro Weitergabe meistens eine Person (80 %), gelegentlich mehrere.
+- Ein manueller Klick an der Spitze bewirkt dagegen 2, 4 und 20 Treffer. Jeder der vier Teamleads führt fünf Teammitglieder.
 - Der Kunde steht außerhalb der Hierarchie. Beim Anklicken trifft er einen zufälligen Ansprechpartner, auch den Chef. Führungskräfte geben diesen Druck weiter.
-- Der Banker mit Zylinder, Monokel und Gehrock trifft ausschließlich den Chef. Von dort läuft der Druck durch die gesamte Hierarchie.
+- Der Banker mit Zylinder, Monokel und Gehrock trifft ausschließlich den Chef. Von dort wird der Druck zufällig nach unten weitergereicht.
 - Auch in der Automatik kommen gelegentlich Kunden- und Bankerdruck hinzu.
 - Zufällige Impulse starten automatisch; die Automatik lässt sich pausieren.
   Bereits gestartete Kaskaden laufen dabei noch zu Ende.
@@ -48,7 +49,7 @@ npm test
 npm run check
 ```
 
-Die Tests prüfen die Verteilung einer vollständigen Kaskade, isolierte Teilbäume
+Die Tests prüfen manuelle Vollkaskaden, automatische Einzelwege, eindeutige Mehrfachtreffer, isolierte Teilbäume
 und das Ende der Weitergabe auf der untersten Ebene. Zusätzlich wurden die
 Klickkaskade, Beschwerden, Reset, MP3-Wiedergabe und ein mobiler Viewport im
 Browser geprüft.

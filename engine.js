@@ -36,3 +36,17 @@ export function totals(state) {
     ),
   );
 }
+
+// Manual impulses fan out through the whole subtree; automatic ones usually
+// follow a single path, occasionally branching to several direct reports.
+export function recipients(node, broadcast = false, random = Math.random) {
+  const pool = children(node);
+  if (broadcast || pool.length === 0) return pool;
+  const count =
+    random() < 0.8 ? 1 : 2 + Math.floor(random() * (pool.length - 1));
+  const selected = [];
+  while (selected.length < count) {
+    selected.push(pool.splice(Math.floor(random() * pool.length), 1)[0]);
+  }
+  return selected;
+}

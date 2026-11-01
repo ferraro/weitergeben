@@ -1,4 +1,11 @@
-import { positions, levels, children, createState, totals } from "./engine.js";
+import {
+  positions,
+  levels,
+  children,
+  recipients,
+  createState,
+  totals,
+} from "./engine.js";
 const $ = (s) => document.querySelector(s);
 let state = createState(),
   automatic = true,
@@ -38,7 +45,7 @@ positions.forEach((n) => {
     `${n.level === 3 ? `Team ${Math.floor(n.index / 5) + 1}, Mitglied ${(n.index % 5) + 1}` : `${levels[n.level]} ${n.index + 1}`}: ${n.level === 3 ? "reagieren" : "Druck weitergeben"}`,
   );
   button.innerHTML = `${art(n.level)}<span class="name">${["CHEFETAGE", "MANAGEMENT", "TEAMLEAD", "TEAM"][n.level]}</span><span class="count">0</span>`;
-  button.addEventListener("click", () => strike(n));
+  button.addEventListener("click", () => strike(n, true));
   $("#stage").append(button);
   nodes.set(n.id, button);
   children(n).forEach((c) => {
@@ -158,16 +165,18 @@ function say(n, text) {
   el.append(b);
   schedule(1700, () => b.remove());
 }
-function strike(n) {
+function strike(n, broadcast = false) {
   if (n.level === 3) {
     say(n, "Wohin denn noch?");
     return;
   }
   animate(nodes.get(n.id), "swing");
   if (Math.random() < 0.3) say(n, phrases[n.level]);
-  children(n).forEach((c, i) => schedule(260 + i * 90, () => receive(c)));
+  recipients(n, broadcast).forEach((c, i) =>
+    schedule(260 + i * 150, () => receive(c, broadcast)),
+  );
 }
-function receive(n) {
+function receive(n, broadcast = false) {
   const idx = positions.indexOf(n);
   state.hits[idx]++;
   const el = nodes.get(n.id);
@@ -180,7 +189,7 @@ function receive(n) {
   schedule(800, () => pop.remove());
   sound("bonk");
   render();
-  if (n.level < 3) schedule(440, () => strike(n));
+  if (n.level < 3) schedule(440, () => strike(n, true));
 }
 function render() {
   const sums = totals(state),
