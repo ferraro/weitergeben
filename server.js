@@ -11,6 +11,7 @@ const mime = {
   ".js": "text/javascript; charset=utf-8",
   ".mp3": "audio/mpeg",
   ".svg": "image/svg+xml",
+  ".png": "image/png",
 };
 http
   .createServer(async (req, res) => {

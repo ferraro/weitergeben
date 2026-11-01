@@ -44,7 +44,7 @@ const phrases = [
   "„Wir sind doch eine Familie.“",
 ];
 function art(level) {
-  return `<svg viewBox="0 0 110 110" aria-hidden="true"><ellipse cx="55" cy="101" rx="31" ry="5" fill="#7e8d6b" opacity=".2"/><path d="M38 82v16h12V86m10-4v16h12V85" fill="#39433c" stroke="#29382f" stroke-width="3"/><path d="M35 62q20-10 40 0l7 27H28z" fill="${colors[level]}" stroke="#344737" stroke-width="2"/><path d="m46 60 9 23 10-23" fill="#f7efdc"/><path d="m55 64-4 7 4 12 4-12z" fill="#d8603c"/><path d="M34 69 23 82" stroke="#795838" stroke-width="10" stroke-linecap="round"/><g class="mallet"><path d="M75 69 89 53" stroke="#795838" stroke-width="10" stroke-linecap="round"/><path d="m85 60 12-35" stroke="#aa8050" stroke-width="7" stroke-linecap="round"/><rect x="82" y="14" width="28" height="19" rx="9" fill="#c79358" stroke="#72583b" stroke-width="2"/><path d="m88 19 16 4" stroke="#e7ba7a" stroke-width="3" stroke-linecap="round"/></g><circle cx="27" cy="39" r="12" fill="#805c3e"/><circle cx="83" cy="39" r="12" fill="#805c3e"/><circle cx="27" cy="39" r="7" fill="#d8ac7b"/><circle cx="83" cy="39" r="7" fill="#d8ac7b"/><path d="M27 38C26 5 83 4 83 38v10c0 30-56 30-56 0z" fill="#805c3e" stroke="#5b4633" stroke-width="2"/><path d="M34 36c-1-14 15-16 21-7 7-9 22-7 22 7v14c0 23-43 23-43 0z" fill="#e6be8c"/><ellipse cx="55" cy="53" rx="17" ry="12" fill="#efcfa0"/><ellipse cx="44" cy="38" rx="3" ry="4" fill="#2c352b"/><ellipse cx="66" cy="38" rx="3" ry="4" fill="#2c352b"/><path d="M51 48h8M45 58q10 ${level === 3 ? "-6" : "7"} 20 0" fill="none" stroke="#6f5137" stroke-width="2.5" stroke-linecap="round"/>${level === 0 ? '<path d="m32 24 1-14 10 5L54 3l10 12 13-5 1 15" fill="#e5b852" stroke="#9a773b" stroke-width="2"/>' : ""}${level === 2 ? '<path d="M33 34h20v13H33zm24 0h20v13H57zm-4 5h4" fill="none" stroke="#344737" stroke-width="2"/>' : ""}</svg>`;
+  return `<svg viewBox="0 0 110 110" aria-hidden="true"><ellipse cx="55" cy="101" rx="31" ry="5" fill="#7e8d6b" opacity=".2"/><path d="M38 82v16h12V86m10-4v16h12V85" fill="#39433c" stroke="#29382f" stroke-width="3"/><path d="M35 62q20-10 40 0l7 27H28z" fill="${colors[level]}" stroke="#344737" stroke-width="2"/><path d="m46 60 9 23 10-23" fill="#f7efdc"/><path d="m55 64-4 7 4 12 4-12z" fill="#d8603c"/><path d="M34 69 23 82" stroke="#795838" stroke-width="10" stroke-linecap="round"/><g class="mallet"><path d="M75 69 89 53" stroke="#795838" stroke-width="10" stroke-linecap="round"/><path d="m85 60 12-35" stroke="#aa8050" stroke-width="7" stroke-linecap="round"/><rect x="82" y="14" width="28" height="19" rx="9" fill="#c79358" stroke="#72583b" stroke-width="2"/><path d="m88 19 16 4" stroke="#e7ba7a" stroke-width="3" stroke-linecap="round"/></g><circle cx="27" cy="39" r="12" fill="#805c3e"/><circle cx="83" cy="39" r="12" fill="#805c3e"/><circle cx="27" cy="39" r="7" fill="#d8ac7b"/><circle cx="83" cy="39" r="7" fill="#d8ac7b"/><path d="M27 38C26 5 83 4 83 38v10c0 30-56 30-56 0z" fill="#805c3e" stroke="#5b4633" stroke-width="2"/><path d="M34 36c-1-14 15-16 21-7 7-9 22-7 22 7v14c0 23-43 23-43 0z" fill="#e6be8c"/><ellipse cx="55" cy="53" rx="17" ry="12" fill="#efcfa0"/><ellipse cx="44" cy="38" rx="3" ry="4" fill="#2c352b"/><ellipse cx="66" cy="38" rx="3" ry="4" fill="#2c352b"/><path class="expression" d="M51 48h8M45 58q10 7 20 0" fill="none" stroke="#6f5137" stroke-width="2.5" stroke-linecap="round"/>${level === 0 ? '<path d="m32 24 1-14 10 5L54 3l10 12 13-5 1 15" fill="#e5b852" stroke="#9a773b" stroke-width="2"/>' : ""}${level === 2 ? '<path d="M33 34h20v13H33zm24 0h20v13H57zm-4 5h4" fill="none" stroke="#344737" stroke-width="2"/>' : ""}</svg>`;
 }
 positions.forEach((n) => {
   const button = document.createElement("button");
@@ -206,7 +206,18 @@ function receive(n, broadcast = false) {
 function render() {
   const sums = totals(state);
   const perPerson = averages(state);
-  const max = Math.max(...perPerson) || 1;
+  const highest = Math.max(...perPerson);
+  const max = highest || 1;
+  positions.forEach((node) => {
+    const unhappy = highest > 0 && perPerson[node.level] === highest;
+    const el = nodes.get(node.id);
+    el.dataset.mood = unhappy ? "unhappy" : "happy";
+    el.querySelector(".expression").setAttribute(
+      "d",
+      `M51 48h8M45 58q10 ${unhappy ? -6 : 7} 20 0`,
+    );
+    el.title = `${levels[node.level]}: ${unhappy ? "aktuell höchster Durchschnitt an Bonks pro Person" : "aktuell nicht am stärksten betroffen"}`;
+  });
   $("#total").textContent = sums
     .reduce((a, b) => a + b, 0)
     .toLocaleString("de-DE");
@@ -241,18 +252,40 @@ $("#sound").onclick = () => {
     activeAudio.clear();
   }
 };
+function renderBin() {
+  const count = state.reports;
+  const fill = count === 0 ? 0 : count < 4 ? 1 : count < 8 ? 2 : 3;
+  $(".bin").dataset.fill = fill;
+  $(".bin").setAttribute(
+    "aria-label",
+    `${["Leerer", "Halbvoller", "Voller", "Überquellender"][fill]} Papierkorb: ${count} Beschwerden`,
+  );
+  $("#bin-count").textContent =
+    `${count} ${count === 1 ? "Beschwerde" : "Beschwerden"}`;
+}
 $("#report").onclick = () => {
-  state.reports++;
+  const stage = $("#stage").getBoundingClientRect();
+  const bin = $(".bin-sprite").getBoundingClientRect();
+  $("#complaint-paper").style.setProperty(
+    "--bin-x",
+    `${bin.left + bin.width / 2 - stage.left}px`,
+  );
+  $("#complaint-paper").style.setProperty(
+    "--bin-y",
+    `${bin.top + bin.height * 0.4 - stage.top}px`,
+  );
   $("#report").disabled = true;
   $("#complaint-paper").classList.add("flying");
   $("#report-status").textContent = "Deine Beschwerde nimmt den Dienstweg …";
   sound("complaint");
   schedule(1500, () => {
+    state.reports++;
+    renderBin();
     $("#complaint-paper").classList.remove("flying");
     animate($(".bin"), "shred");
     sound("shredder");
     $("#report-status").textContent =
-      `${state.reports} ${state.reports === 1 ? "Beschwerde wurde" : "Beschwerden wurden"} ordnungsgemäß abgelegt. In Ablage P.`;
+      `${state.reports} ${state.reports === 1 ? "Beschwerde im Papierkorb" : "Beschwerden im Papierkorb"}. ${state.reports >= 8 ? "Er quillt über. Geändert wurde trotzdem nichts." : "Gelesen: 0. Umgesetzt: 0."}`;
     $("#quote").textContent = "„Danke für dein wertvolles Feedback.“";
     $("#report").disabled = false;
   });
@@ -275,6 +308,7 @@ function clearActivity() {
   document.querySelectorAll(".customer-pressure").forEach((el) => el.remove());
   $("#customer-status").textContent =
     "Druck von außen: Kunde → alle. Banker → nur Chef.";
+  renderBin();
   $(".bin").classList.remove("shred");
   $("#complaint-paper").classList.remove("flying");
   $("#report").disabled = false;
@@ -323,6 +357,7 @@ $("#speed").addEventListener("change", () => {
   }
 });
 describeSituation();
+render();
 function frame(now) {
   const delta = Math.min(now - previous, 100);
   previous = now;

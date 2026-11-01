@@ -1059,3 +1059,52 @@ body:has(.workspace) > footer {
   top: auto;
   bottom: calc(100% + 6px);
 }
+
+.stage-scroll .bin {
+  width: clamp(76px, 9cqw, 125px);
+  top: 19%;
+  right: 1%;
+  transform: none;
+  font-size: inherit;
+}
+.bin-sprite {
+  width: 100%;
+  aspect-ratio: 1;
+  background-image: url("assets/sprites/papierkorb.png");
+  background-size: 200% 200%;
+  background-position: 0 0;
+}
+.bin[data-fill="1"] .bin-sprite {
+  background-position: 100% 0;
+}
+.bin[data-fill="2"] .bin-sprite {
+  background-position: 0 100%;
+}
+.bin[data-fill="3"] .bin-sprite {
+  background-position: 100% 100%;
+}
+.bin small {
+  font-size: clamp(7px, 0.65cqw, 10px);
+  font-weight: bold;
+}
+#bin-count {
+  display: block;
+  font-size: clamp(7px, 0.65cqw, 10px);
+  margin-top: 4px;
+}
+.bin[data-fill="3"] #bin-count {
+  color: #ac4929;
+}
+@keyframes fly {
+  70% {
+    left: 50%;
+    top: 3%;
+    transform: rotate(-15deg);
+  }
+  100% {
+    left: var(--bin-x);
+    top: var(--bin-y);
+    transform: rotate(35deg) scale(0.2);
+    opacity: 0;
+  }
+}

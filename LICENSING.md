@@ -3,7 +3,7 @@
 Copyright (c) 2026 ferraro.
 
 Der aktuelle Quellcode einschließlich selbst erstellter SVG-Grafiken und
-Dokumentation wird unter der **GNU General Public License, Version 3 oder jeder
+Dokumentation sowie der für dieses Projekt generierte Papierkorb-Sprite-Atlas (soweit Rechte daran bestehen) wird unter der **GNU General Public License, Version 3 oder jeder
 späteren Version** veröffentlicht (SPDX: `GPL-3.0-or-later`). Der vollständige,
 unveränderte Lizenztext steht in [LICENSE](LICENSE).
 

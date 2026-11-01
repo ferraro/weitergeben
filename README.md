@@ -4,7 +4,7 @@
 
 Eine kleine interaktive 2D-Bürosatire über **autoritären Managementstil**.
 27 Cartoon-Affen, ein Kunde und ein Banker, vier Hierarchieebenen und ein sehr zuverlässiger Dienstweg
-für Druck. Der Dienstweg für Beschwerden endet dagegen in **Ablage P**.
+für Druck. Der Dienstweg für Beschwerden endet dagegen in **Papierkorb**.
 
 Die Figuren und die Firma sind frei erfunden. Die Satire kritisiert einen
 Führungsstil und bezieht sich auf keine reale Person oder Organisation.
@@ -62,7 +62,7 @@ Klickkaskade, Beschwerden, Reset, MP3-Wiedergabe und ein mobiler Viewport im
 Browser geprüft.
 
 Für statisches Hosting genügen `index.html`, `style.css`, `app.js`, `engine.js`,
-`music.js`, `forschung.html`, `favicon.svg`, `assets/audio/*.mp3` und `assets/music/*.mp3`. Es ist kein Backend nötig.
+`music.js`, `forschung.html`, `favicon.svg`, `assets/audio/*.mp3` und `assets/music/*.mp3` sowie `assets/sprites/papierkorb.png`. Es ist kein Backend nötig.
 
 ## Mitmachen
 
@@ -81,5 +81,9 @@ Musik: Suno, siehe [Musik-Herkunft und Prompts](assets/music/README.md).
 ## Textvorschlag für X
 
 > Ich habe einen kleinen Browser-Simulator über autoritären Managementstil gebaut:
-> Oben ein Klick, unten eine ganze Bonk-Kaskade. Beschwerden nach oben? Landen in Ablage P. 🐒
+> Oben ein Klick, unten eine ganze Bonk-Kaskade. Beschwerden nach oben? Füllen den Papierkorb. 🐒
 > Fiktive Firma, Open Source: https://github.com/ferraro/weitergeben
+
+Der Papierkorb verwendet einen mit dem integrierten Imagegen-Tool erstellten Sprite-Atlas. [Prompt und Herkunft](assets/sprites/README.md).
+
+Die Gesichtsausdrücke folgen dem höchsten Durchschnitt pro Job-Kategorie: Figuren dieser Kategorie schauen unglücklich, alle anderen grinsen. Gleichstände zählen mit; ohne Treffer grinsen alle. Das ist eine Spielvisualisierung, keine Messung psychischen Befindens.

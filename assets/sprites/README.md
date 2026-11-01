@@ -1,0 +1,15 @@
+# Papierkorb-Sprites
+
+Ein Sprite-Atlas mit vier Zuständen (2 × 2): leer, halbvoll, voll, überquellend. Erstellt am 1. November 2026 mit dem integrierten Imagegen-Tool; kein CLI-Fallback. Transparenter PNG-Hintergrund. Datei: `papierkorb.png`.
+
+Im Spiel: 0 / 1–3 / 4–7 / mindestens 8 eingegangene Beschwerden. Gezählt wird beim Eintreffen; Reset leert den Korb. Sprite-Zustände bleiben bei einem Situationswechsel erhalten.
+
+Lizenzgewährung für die Grafik: GPL-3.0-or-later, soweit Rechte daran bestehen. Diese generierte Grafik ist von den separaten Audio-Ausnahmen nicht betroffen.
+
+## Erste Fassung (anschließend ersetzt)
+
+Use case: stylized-concept. Asset type: a single production-ready 2D game sprite atlas, square canvas, exactly 2 columns and 2 rows of equal square cells with NO gutters. Transparent background. In every cell the SAME small round grey-green metal office wastepaper basket, open top, slightly tapered body, thick dark olive cartoon outlines, simple flat cel shading, warm cream crumpled paper. Front three-quarter view, identical camera, identical bin size and bin placement across all four cells. Each bin body occupies x=25% to 75%, y=38% to 88% of ITS OWN CELL, with a consistent ground baseline; leave room above for overflowing paper. Top-left EMPTY bin with visible dark empty interior. Top-right HALF FULL bin with a few crumpled papers visible inside the opening. Bottom-left FULL bin with paper heaped just above the rim. Bottom-right OVERFLOWING bin with a tall funny mound of papers and a few paper balls on the floor beside it. Cute clear readable office satire game prop. No characters, no text, no letters, no labels, no borders, no grid lines, no watermark, no background scene, no photographic textures. Each state confined to its own quadrant, separated by transparent padding within the cell.
+
+## Finale Überarbeitung mit Imagegen
+
+Edit this 2x2 wastepaper basket sprite atlas. Preserve the exact canvas, transparent alpha background, four equal quadrants, bin positions, bin shapes, camera, dark olive-grey metal bins and overall cartoon style. Change ONLY the trash contents: remove ALL beige popcorn-like lumps. Replace them with unmistakable WHITE OFFICE PAPER DOCUMENTS, large thin rectangular sheets with visible straight paper edges, folded corners, some bent or loosely crumpled sheets, printed dark gray horizontal text lines and occasional red rectangular complaint stamp mark (no legible words required). Predominantly white with pale cool-gray folds, NOT cream, yellow, tan or beige. Top-left remains completely empty. Top-right has a few loosely folded rectangular white documents. Bottom-left full with large bent rectangular sheets and visible text lines above the rim. Bottom-right overflowing with a tall pile of rectangular crumpled letters, a long half-folded letter hanging over the rim, two discarded white documents on the floor. All paper must read as office correspondence even at thumbnail size, not rocks, popcorn, food, foam or packing peanuts. Preserve true transparency and exactly the 2x2 atlas grid.
