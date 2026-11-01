@@ -1,13 +1,142 @@
 <!doctype html>
 <html lang="de">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f1eee6"><meta name="description" content="Weitergeben – eine interaktive Cartoon-Satire über autoritären Managementstil. Druck geht runter. Feedback landet im Papierkorb."><title>Weitergeben — Der Druck kommt von oben.</title><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="style.css"></head>
-<body>
-<header><a class="wordmark" href="./">w<span>↘</span></a><span class="edition">EINE INTERAKTIVE BÜROSATIRE</span><a class="source" href="https://github.com/ferraro/weitergeben" target="_blank" rel="noopener">Open Source ↗</a></header>
-<main>
-<section class="intro"><div><p class="eyebrow"><span></span> WILLKOMMEN IM ORGANIGRAMM</p><h1>Weiter<span>geben.</span></h1><p class="subtitle">Oben eine Entscheidung.<br>Unten ein ganz normaler Montag.</p></div><div class="intro-note"><span>↘</span><p>Eine kleine Simulation über<br><strong>autoritären Managementstil.</strong><br>Und darüber, wo Druck ankommt.</p></div></section>
-<div class="workspace"><section class="game" aria-label="Interaktive Management-Pyramide"><div class="game-top"><span><i id="status-dot"></i> <b id="mode-label">DER BETRIEB LÄUFT</b></span><span>FIKTIVE FIRMA · ECHTES PRINZIP</span></div><div class="stage" id="stage"><svg class="connections" viewBox="0 0 800 580" preserveAspectRatio="none" aria-hidden="true" id="connections"></svg><div class="tier-tag t0">STRATEGIE</div><div class="tier-tag t1">DELEGATION</div><div class="tier-tag t2">WEITERLEITUNG</div><div class="tier-tag t3">REALITÄT</div><div class="bin" title="Ablage für Feedback">▥<small>ABLAGE P</small></div><div id="complaint-paper" aria-hidden="true">✉</div></div><div class="game-bottom"><span>↖ Klicke auf eine Figur, um Druck weiterzugeben.</span><span>15 Mitarbeitende. 0 Vorbilder.</span></div></section>
-<aside><div class="panel-heading"><span class="eyebrow">DAS STIMMUNGSBILD</span><span>↙</span></div><h2>Druck kommt an.</h2><p class="muted">Nur nicht überall gleich.</p><div class="total"><strong id="total">0</strong><span>Bonks insgesamt</span></div><div id="stats"></div><div class="feedback-stat"><span>Feedback umgesetzt</span><strong>0 %</strong></div><p class="aside-quote" id="quote">„Wir geben das nur weiter.“</p><p class="report-status" id="report-status" role="status">Der Dienstweg ist offen. Theoretisch.</p></aside></div>
-<section class="controls" aria-label="Spielsteuerung"><div class="control-group"><button id="auto" class="primary" aria-pressed="true">Ⅱ Automatik pausieren</button><label class="speed">Drucklevel <select id="speed"><option value="3400">Montag</option><option value="1900" selected>Quartalsende</option><option value="850">Restrukturierung</option></select></label></div><div class="control-group"><button id="report" class="report">↑ Druck nach oben melden</button><button id="sound" aria-pressed="false">Ton aus</button><button id="reset" aria-label="Simulation zurücksetzen" title="Zurücksetzen">↺</button></div></section>
-<section class="message"><span>↓</span><p>Wenn Führung Druck nur weiterreicht,<br><strong>landet er am Ende ganz unten.</strong></p><p class="fine">Die Figuren und die Firma sind frei erfunden. Diese Satire kritisiert einen Führungsstil und bezieht sich auf keine reale Person oder Organisation.</p></section>
-</main><footer><span>WEITERGEBEN © 2026 · CODE: MIT</span><span>Mit Humor nach unten schauen. Mit Verantwortung nach oben.</span><a href="https://github.com/ferraro/weitergeben">ferraro / weitergeben ↗</a></footer><script type="module" src="app.js"></script>
-</body></html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#f1eee6" />
+    <meta
+      name="description"
+      content="Weitergeben – eine interaktive Cartoon-Satire über autoritären Managementstil. Druck geht runter. Feedback landet im Papierkorb."
+    />
+    <title>Weitergeben — Der Druck kommt von oben.</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <a class="wordmark" href="./">w<span>↘</span></a
+      ><span class="edition">EINE INTERAKTIVE BÜROSATIRE</span
+      ><a
+        class="source"
+        href="https://github.com/ferraro/weitergeben"
+        target="_blank"
+        rel="noopener"
+        >Open Source ↗</a
+      >
+    </header>
+    <main>
+      <section class="intro">
+        <div>
+          <p class="eyebrow"><span></span> WILLKOMMEN IM ORGANIGRAMM</p>
+          <h1>Weiter<span>geben.</span></h1>
+          <p class="subtitle">
+            Oben eine Entscheidung.<br />Unten ein ganz normaler Montag.
+          </p>
+        </div>
+        <div class="intro-note">
+          <span>↘</span>
+          <p>
+            Eine kleine Simulation über<br /><strong
+              >autoritären Managementstil.</strong
+            ><br />Und darüber, wo Druck ankommt.
+          </p>
+        </div>
+      </section>
+      <div class="workspace">
+        <section class="game" aria-label="Interaktive Management-Pyramide">
+          <div class="game-top">
+            <span
+              ><i id="status-dot"></i>
+              <b id="mode-label">DER BETRIEB LÄUFT</b></span
+            ><span>FIKTIVE FIRMA · ECHTES PRINZIP</span>
+          </div>
+          <div class="stage" id="stage">
+            <svg
+              class="connections"
+              viewBox="0 0 800 580"
+              preserveAspectRatio="none"
+              aria-hidden="true"
+              id="connections"
+            ></svg>
+            <div class="tier-tag t0">STRATEGIE</div>
+            <div class="tier-tag t1">DELEGATION</div>
+            <div class="tier-tag t2">WEITERLEITUNG</div>
+            <div class="tier-tag t3">REALITÄT</div>
+            <div class="bin" title="Ablage für Feedback">
+              ▥<small>ABLAGE P</small>
+            </div>
+            <div id="complaint-paper" aria-hidden="true">✉</div>
+          </div>
+          <div class="game-bottom">
+            <span>↖ Klicke auf eine Figur, um Druck weiterzugeben.</span
+            ><span>15 Mitarbeitende. 0 Vorbilder.</span>
+          </div>
+        </section>
+        <aside>
+          <div class="panel-heading">
+            <span class="eyebrow">DAS STIMMUNGSBILD</span><span>↙</span>
+          </div>
+          <h2>Druck kommt an.</h2>
+          <p class="muted">Nur nicht überall gleich.</p>
+          <div class="total">
+            <strong id="total">0</strong><span>Bonks insgesamt</span>
+          </div>
+          <div id="stats"></div>
+          <div class="feedback-stat">
+            <span>Feedback umgesetzt</span><strong>0 %</strong>
+          </div>
+          <p class="aside-quote" id="quote">„Wir geben das nur weiter.“</p>
+          <p class="report-status" id="report-status" role="status">
+            Der Dienstweg ist offen. Theoretisch.
+          </p>
+        </aside>
+      </div>
+      <section class="controls" aria-label="Spielsteuerung">
+        <div class="control-group">
+          <button id="auto" class="primary" aria-pressed="true">
+            Ⅱ Automatik pausieren</button
+          ><label class="speed"
+            >Drucklevel
+            <select id="speed">
+              <option value="3400">Montag</option>
+              <option value="1900" selected>Quartalsende</option>
+              <option value="850">Restrukturierung</option>
+            </select></label
+          >
+        </div>
+        <div class="control-group">
+          <button id="report" class="report">↑ Druck nach oben melden</button
+          ><button id="sound" aria-pressed="false">Ton aus</button
+          ><button
+            id="reset"
+            aria-label="Simulation zurücksetzen"
+            title="Zurücksetzen"
+          >
+            ↺
+          </button>
+        </div>
+      </section>
+      <section class="message">
+        <span>↓</span>
+        <p>
+          Wenn Führung Druck nur weiterreicht,<br /><strong
+            >landet er am Ende ganz unten.</strong
+          >
+        </p>
+        <p class="fine">
+          Die Figuren und die Firma sind frei erfunden. Diese Satire kritisiert
+          einen Führungsstil und bezieht sich auf keine reale Person oder
+          Organisation.
+        </p>
+      </section>
+    </main>
+    <footer>
+      <span>WEITERGEBEN © 2026 · CODE: MIT</span
+      ><span>Mit Humor nach unten schauen. Mit Verantwortung nach oben.</span
+      ><a href="https://github.com/ferraro/weitergeben"
+        >ferraro / weitergeben ↗</a
+      >
+    </footer>
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
