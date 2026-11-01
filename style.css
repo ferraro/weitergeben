@@ -750,3 +750,42 @@ footer {
     padding: 10px;
   }
 }
+
+.banker {
+  left: 82%;
+  top: 1%;
+  width: 90px;
+}
+.banker .name,
+.banker .customer-hint {
+  color: #846a2f;
+}
+.connections .banker-pressure {
+  stroke: #a88a43;
+}
+.bin {
+  top: 132px;
+  right: 3%;
+}
+@keyframes fly {
+  70% {
+    left: 50%;
+    top: 3%;
+    transform: rotate(-15deg);
+  }
+  100% {
+    left: 93%;
+    top: 22%;
+    transform: rotate(35deg) scale(0.2);
+    opacity: 0;
+  }
+}
+@media (max-width: 700px) {
+  .banker {
+    width: 56px;
+  }
+  .bin {
+    top: 125px;
+    right: 2%;
+  }
+}

@@ -10,7 +10,14 @@ let state = createState(),
 const nodes = new Map(),
   sounds = {},
   activeAudio = new Set();
-const colors = ["#304e46", "#637b67", "#a3ae83", "#e78961", "#6885a8"];
+const colors = [
+  "#304e46",
+  "#637b67",
+  "#a3ae83",
+  "#e78961",
+  "#6885a8",
+  "#30353f",
+];
 const phrases = [
   "„Wir müssen effizienter werden.“",
   "„Das kommt von ganz oben.“",
@@ -54,21 +61,44 @@ const customerPhrases = [
   "Wir brauchen das noch heute.",
   "Ist doch nur eine kleine Änderung.",
 ];
+const banker = document.createElement("button");
+banker.id = "banker";
+banker.className = "monkey banker";
+banker.setAttribute("aria-label", "Banker: nur den Chef bonken");
+const bankerArt = art(5).replace(
+  "</svg>",
+  `<path d="M33 22h45M39 21V2h32v19" fill="#252a32" stroke="#151a21" stroke-width="4" stroke-linecap="round"/><path d="M40 15h30" stroke="#b79852" stroke-width="4"/><circle cx="66" cy="38" r="10" fill="#d8e8ee" fill-opacity=".2" stroke="#d5af54" stroke-width="2.5"/><path d="M76 38q12 26-7 37" fill="none" stroke="#d5af54" stroke-width="1.5"/><path d="m47 66 8 4-8 4zm16 0-8 4 8 4z" fill="#252a32"/><path d="M41 82q10 12 22 0" fill="none" stroke="#d5af54" stroke-width="1.5"/></svg>`,
+);
+banker.innerHTML = `${bankerArt}<span class="name">BANKER ↙</span><span class="customer-hint">Nur zur Chefetage</span>`;
+$("#stage").append(banker);
+const bankerPhrases = [
+  "Die Kreditlinie läuft aus!",
+  "Wir erwarten mehr Rendite!",
+  "Die Sicherheiten reichen nicht!",
+];
+banker.addEventListener("click", bankerStrike);
+function bankerStrike() {
+  externalStrike(banker, positions[0], "Banker", bankerPhrases);
+}
 customer.addEventListener("click", customerStrike);
 function customerStrike() {
   if (customer.disabled) return;
-  customer.disabled = true;
   const target = positions[Math.floor(Math.random() * positions.length)];
-  animate(customer, "swing");
-  const phrase =
-    customerPhrases[Math.floor(Math.random() * customerPhrases.length)];
+  externalStrike(customer, target, "Kunde", customerPhrases);
+}
+function externalStrike(actor, target, label, phrases) {
+  if (actor.disabled) return;
+  actor.disabled = true;
+  animate(actor, "swing");
+  const phrase = phrases[Math.floor(Math.random() * phrases.length)];
   $("#customer-status").textContent =
-    `Kunde: „${phrase}“ → ${target.level === 3 ? `Team ${Math.floor(target.index / 5) + 1}, Mitglied ${(target.index % 5) + 1}` : levels[target.level]}`;
+    `${label}: „${phrase}“ → ${target.level === 3 ? `Team ${Math.floor(target.index / 5) + 1}, Mitglied ${(target.index % 5) + 1}` : levels[target.level]}`;
   const stageRect = $("#stage").getBoundingClientRect();
-  const from = customer.getBoundingClientRect();
+  const from = actor.getBoundingClientRect();
   const to = nodes.get(target.id).getBoundingClientRect();
   const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
   line.classList.add("customer-pressure");
+  if (actor === banker) line.classList.add("banker-pressure");
   line.setAttribute(
     "x1",
     ((from.left + from.width / 2 - stageRect.left) / stageRect.width) * 800,
@@ -89,7 +119,7 @@ function customerStrike() {
   schedule(300, () => receive(target));
   schedule(1000, () => {
     line.remove();
-    customer.disabled = false;
+    actor.disabled = false;
   });
 }
 $("#stats").innerHTML = levels
@@ -214,9 +244,11 @@ $("#reset").onclick = () => {
   });
   customer.disabled = false;
   customer.classList.remove("swing");
+  banker.disabled = false;
+  banker.classList.remove("swing");
   document.querySelectorAll(".customer-pressure").forEach((el) => el.remove());
   $("#customer-status").textContent =
-    "Auch von außen kommt Druck: Klicke auf den Kunden.";
+    "Druck von außen: Kunde → alle. Banker → nur Chef.";
   $(".bin").classList.remove("shred");
   $("#complaint-paper").classList.remove("flying");
   $("#report").disabled = false;
@@ -238,6 +270,8 @@ function frame(now) {
       const r = Math.random();
       if (r < 0.2) {
         customerStrike();
+      } else if (r < 0.3) {
+        bankerStrike();
       } else {
         const level = r < 0.7 ? 0 : r < 0.9 ? 1 : 2;
         const candidates = positions.filter((n) => n.level === level);
