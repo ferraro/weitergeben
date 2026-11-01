@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // Copyright (c) 2026 ferraro
+import { audioContext, loadAudio } from "./audio.js";
 import { createMusicPlayer } from "./music.js";
 import {
   positions,
@@ -27,7 +28,6 @@ const music = createMusicPlayer(
   $("#speed").value,
 );
 const nodes = new Map(),
-  sounds = {},
   activeAudio = new Set();
 const colors = [
   "#304e46",
@@ -148,16 +148,38 @@ $("#stats").innerHTML = levels
   )
   .join("");
 for (const name of ["bonk", "complaint", "shredder"]) {
-  sounds[name] = new Audio(`assets/audio/${name}.mp3`);
-  sounds[name].preload = "auto";
+  loadAudio(`assets/audio/${name}.mp3`).catch(() => {});
 }
 function sound(name) {
-  if (!enabledSound || activeAudio.size >= 10) return;
-  const audio = sounds[name].cloneNode();
-  audio.volume = name === "bonk" ? 0.24 : 0.4;
-  activeAudio.add(audio);
-  audio.onended = () => activeAudio.delete(audio);
-  audio.play().catch(() => activeAudio.delete(audio));
+  if (
+    !enabledSound ||
+    !audioContext ||
+    audioContext.state !== "running" ||
+    activeAudio.size >= 10
+  )
+    return;
+  loadAudio(`assets/audio/${name}.mp3`)
+    .then((buffer) => {
+      if (
+        !enabledSound ||
+        audioContext.state !== "running" ||
+        document.hidden ||
+        activeAudio.size >= 10
+      )
+        return;
+      const source = audioContext.createBufferSource();
+      const gain = audioContext.createGain();
+      source.buffer = buffer;
+      gain.gain.value = name === "bonk" ? 0.24 : 0.4;
+      source.connect(gain).connect(audioContext.destination);
+      activeAudio.add(source);
+      source.onended = () => {
+        activeAudio.delete(source);
+        gain.disconnect();
+      };
+      source.start();
+    })
+    .catch(() => {});
 }
 function schedule(delay, fn) {
   queue.push({ at: clock + delay, fn });
@@ -248,7 +270,7 @@ $("#sound").onclick = () => {
   $("#sound").setAttribute("aria-pressed", enabledSound);
   if (enabledSound) sound("bonk");
   else {
-    activeAudio.forEach((a) => a.pause());
+    activeAudio.forEach((a) => a.stop());
     activeAudio.clear();
   }
 };
@@ -293,7 +315,7 @@ $("#report").onclick = () => {
 function clearActivity() {
   queue = [];
   elapsed = 0;
-  activeAudio.forEach((a) => a.pause());
+  activeAudio.forEach((a) => a.stop());
   activeAudio.clear();
   document.querySelectorAll(".bubble,.pop").forEach((el) => el.remove());
   nodes.forEach((el) => {

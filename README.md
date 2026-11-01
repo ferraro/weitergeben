@@ -48,7 +48,7 @@ verwenden. Der Entwicklungsserver bindet ausschließlich an localhost.
 
 HTML, CSS, JavaScript-Module und selbst gezeichnete, animierbare SVG-Figuren.
 Kein Framework, kein Build, keine Laufzeitabhängigkeiten, keine externen Fonts,
-kein Tracking, keine Anmeldung. Musik und Effekte starten eingeschaltet; blockiert der Browser die automatische Wiedergabe, startet Musik nach dem ersten Klick oder Tastendruck. Browser-Tabs im Hintergrund
+kein Tracking, keine Anmeldung. Musik und Effekte starten eingeschaltet; blockiert der Browser die automatische Wiedergabe, startet der gemeinsame Audiokontext nach dem ersten Klick oder Tastendruck. Solange die Freigabe fehlt, erscheint „Ton starten“. Browser-Tabs im Hintergrund
 pausieren die Simulation. Die Darstellung berücksichtigt reduzierte Bewegung.
 
 ```sh
@@ -62,7 +62,7 @@ Klickkaskade, Beschwerden, Reset, MP3-Wiedergabe und ein mobiler Viewport im
 Browser geprüft.
 
 Für statisches Hosting genügen `index.html`, `style.css`, `app.js`, `engine.js`,
-`music.js`, `forschung.html`, `favicon.svg`, `assets/audio/*.mp3` und `assets/music/*.mp3` sowie `assets/sprites/papierkorb.png`. Es ist kein Backend nötig.
+`audio.js`, `music.js`, `forschung.html`, `favicon.svg`, `assets/audio/*.mp3` und `assets/music/*.mp3` sowie `assets/sprites/papierkorb.png`. Es ist kein Backend nötig.
 
 ## Mitmachen
 

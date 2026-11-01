@@ -1,117 +1,99 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // Copyright (c) 2026 ferraro
-// Enabled by default; retry after user interaction if autoplay is blocked.
+import { audioContext, loadAudio } from "./audio.js";
 export function createMusicPlayer(button, status, initialSituation) {
   const titles = {
     everyday: "Dienst nach Vorschrift",
     quarter: "Alle müssen liefern",
     crisis: "Die Kreditlinie",
   };
-  const tracks = new Map();
   let enabled = true,
-    waitingForGesture = false,
     selected = initialSituation,
-    revision = 0,
-    frame;
-  const volume = 0.2;
-  function trackFor(key) {
-    if (!tracks.has(key)) {
-      const audio = document.createElement("audio");
-      audio.src = `assets/music/${key}.mp3`;
-      audio.preload = "none";
-      audio.loop = true;
-      audio.volume = 0;
-      audio.dataset.music = key;
-      document.body.append(audio);
-      tracks.set(key, audio);
-    }
-    return tracks.get(key);
-  }
-  function pauseAll() {
+    revision = 0;
+  const playing = new Set();
+  function stopAll() {
     revision++;
-    cancelAnimationFrame(frame);
-    tracks.forEach((audio) => {
-      audio.pause();
-      audio.volume = 0;
+    playing.forEach((track) => {
+      track.source.stop();
+      track.gain.disconnect();
     });
+    playing.clear();
   }
-  function updateButton() {
+  function describe() {
     button.setAttribute("aria-pressed", String(enabled));
     button.textContent = enabled ? "♫ Musik an" : "♫ Musik aus";
+    if (!enabled) status.textContent = "Musik ausgeschaltet.";
+    else if (audioContext?.state !== "running")
+      status.textContent =
+        "Ton ist eingeschaltet. Falls noch nichts zu hören ist: „Ton starten“ anklicken.";
   }
   async function transition() {
     const attempt = ++revision;
-    cancelAnimationFrame(frame);
-    if (!enabled || document.hidden) {
-      pauseAll();
+    if (!enabled || document.hidden || !audioContext) {
+      stopAll();
+      describe();
+      return;
+    }
+    if (audioContext.state !== "running") {
+      describe();
       return;
     }
     const key = selected;
-    const next = trackFor(key);
+    if ([...playing].some((t) => t.key === key && !t.retiring)) return;
     status.textContent = `Musik lädt: ${titles[key]} …`;
     try {
-      await next.play();
-      waitingForGesture = false;
-      if (attempt !== revision) {
-        if (!enabled || document.hidden || selected !== key) next.pause();
+      const buffer = await loadAudio(`assets/music/${key}.mp3`);
+      if (
+        attempt !== revision ||
+        !enabled ||
+        document.hidden ||
+        audioContext.state !== "running"
+      )
         return;
+      const now = audioContext.currentTime;
+      for (const track of playing) {
+        if (track.retiring) continue;
+        track.retiring = true;
+        track.gain.gain.cancelAndHoldAtTime(now);
+        track.gain.gain.linearRampToValueAtTime(0, now + 1.4);
+        track.source.stop(now + 1.4);
       }
+      const source = audioContext.createBufferSource();
+      const gain = audioContext.createGain();
+      source.buffer = buffer;
+      source.loop = true;
+      gain.gain.setValueAtTime(0, now);
+      gain.gain.linearRampToValueAtTime(0.2, now + 1.4);
+      source.connect(gain).connect(audioContext.destination);
+      const track = { key, source, gain, retiring: false };
+      playing.add(track);
+      source.onended = () => {
+        playing.delete(track);
+        gain.disconnect();
+      };
+      source.start();
       status.textContent = `♫ ${titles[key]} · Suno`;
-      const start = performance.now();
-      const from = new Map(
-        [...tracks].map(([name, audio]) => [name, audio.volume]),
-      );
-      function fade(now) {
-        if (attempt !== revision) return;
-        const progress = Math.min(1, (now - start) / 1400);
-        tracks.forEach((audio, name) => {
-          const target = name === key ? volume : 0;
-          audio.volume = from.get(name) + (target - from.get(name)) * progress;
-          if (progress === 1 && name !== key) {
-            audio.pause();
-            audio.currentTime = 0;
-          }
-        });
-        if (progress < 1) frame = requestAnimationFrame(fade);
-      }
-      frame = requestAnimationFrame(fade);
-    } catch (error) {
+    } catch {
       if (attempt !== revision) return;
-      if (error.name === "NotAllowedError") {
-        waitingForGesture = true;
-        pauseAll();
-        status.textContent =
-          "Musik ist an – startet nach dem ersten Klick oder Tastendruck.";
-        return;
-      }
-      enabled = false;
-      pauseAll();
-      updateButton();
       status.textContent =
-        "Musik konnte nicht starten. Mit „Musik aus“ erneut versuchen.";
+        "Musik konnte nicht geladen werden. Musik aus- und wieder einschalten, um erneut zu laden.";
     }
   }
   button.addEventListener("click", () => {
     enabled = !enabled;
-    updateButton();
+    describe();
     if (enabled) transition();
-    else {
-      pauseAll();
-      status.textContent = "Musik ausgeschaltet.";
-    }
+    else stopAll();
   });
   document.addEventListener("visibilitychange", () => {
-    if (document.hidden) pauseAll();
+    if (document.hidden) stopAll();
     else if (enabled) transition();
   });
-  function unlock(event) {
-    if (event.target instanceof Element && event.target.closest("#music"))
-      return;
-    if (enabled && waitingForGesture && !document.hidden) transition();
-  }
-  document.addEventListener("click", unlock);
-  document.addEventListener("keydown", unlock);
-  updateButton();
+  audioContext?.addEventListener("statechange", () => {
+    describe();
+    if (audioContext.state === "running" && enabled) transition();
+  });
+  describe();
   transition();
   return {
     setSituation(key) {
