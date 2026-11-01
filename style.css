@@ -943,3 +943,16 @@ footer {
     flex-direction: column;
   }
 }
+.situation-status {
+  padding: 12px 16px;
+  border-left: 3px solid #e9673e;
+  background: #e5e9dd;
+  font-size: 13px;
+  line-height: 1.6;
+}
+.workspace[data-situation="quarter"] {
+  background-color: #eee6d4;
+}
+.workspace[data-situation="crisis"] {
+  background-color: #edddd3;
+}

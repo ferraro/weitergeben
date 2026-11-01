@@ -1,6 +1,6 @@
 # Weitergeben ↘
 
-**Oben eine Entscheidung. Unten ein ganz normaler Montag.**
+**Oben eine Entscheidung. Unten kommt sie an.**
 
 Eine kleine interaktive 2D-Bürosatire über **autoritären Managementstil**.
 27 Cartoon-Affen, ein Kunde und ein Banker, vier Hierarchieebenen und ein sehr zuverlässiger Dienstweg
@@ -12,14 +12,14 @@ Führungsstil und bezieht sich auf keine reale Person oder Organisation.
 ## Spielen
 
 - Auf eine Führungskraft klicken: Eine volle Kaskade trifft alle im darunterliegenden Teilbaum; beim operativen Team endet die Weitergabe.
-- Automatische Impulse und Druck von Kunden oder Banker treffen pro Weitergabe meistens eine Person (80 %), gelegentlich mehrere.
+- Automatische Weitergabe hängt von der Betriebssituation ab: im Alltag überwiegend einzeln, im Quartalsendspurt häufig ganze Teams, in der Krise breite Wellen.
 - Ein manueller Klick an der Spitze bewirkt dagegen 2, 4 und 20 Treffer. Jeder der vier Teamleads führt fünf Teammitglieder.
 - Der Kunde steht außerhalb der Hierarchie. Beim Anklicken trifft er einen zufälligen Ansprechpartner, auch den Chef. Führungskräfte geben diesen Druck weiter.
 - Der Banker mit Zylinder, Monokel und Gehrock trifft ausschließlich den Chef. Von dort wird der Druck zufällig nach unten weitergereicht.
 - Auch in der Automatik kommen gelegentlich Kunden- und Bankerdruck hinzu.
 - Zufällige Impulse starten automatisch; die Automatik lässt sich pausieren.
   Bereits gestartete Kaskaden laufen dabei noch zu Ende.
-- Drei Drucklevel regeln die Häufigkeit: Montag, Quartalsende, Restrukturierung.
+- Drei Betriebssituationen verändern Tempo, Auslöser und Zielverteilung: Normaler Arbeitstag, Quartalsendspurt, Krisenmodus. Beim Umschalten stoppt die alte Kaskade; die Treffer bleiben erhalten. Bei laufender Automatik zeigt ein sofortiger Beispielimpuls die neue Situation, im pausierten Zustand bleibt sie pausiert.
 - „Druck nach oben melden“ schickt Feedback auf seinen tragikomischen Dienstweg.
 - „Ton an“ aktiviert drei eigens mit ElevenLabs erzeugte Cartoon-Effekte.
 - ↺ setzt Treffer, laufende Kaskaden und Beschwerden zurück. Einstellungen bleiben.

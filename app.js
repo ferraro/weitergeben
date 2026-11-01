@@ -6,6 +6,8 @@ import {
   createState,
   totals,
   averages,
+  situations,
+  impulseSource,
 } from "./engine.js";
 const $ = (s) => document.querySelector(s);
 let state = createState(),
@@ -15,6 +17,7 @@ let state = createState(),
   previous = performance.now(),
   clock = 0,
   queue = [];
+let situation = situations[$("#speed").value];
 const nodes = new Map(),
   sounds = {},
   activeAudio = new Set();
@@ -173,7 +176,7 @@ function strike(n, broadcast = false) {
   }
   animate(nodes.get(n.id), "swing");
   if (Math.random() < 0.3) say(n, phrases[n.level]);
-  recipients(n, broadcast).forEach((c, i) =>
+  recipients(n, broadcast, Math.random, situation).forEach((c, i) =>
     schedule(260 + i * 150, () => receive(c, broadcast)),
   );
 }
@@ -218,6 +221,7 @@ $("#auto").onclick = () => {
     : "AUTOMATIK PAUSIERT";
   $("#status-dot").style.background = automatic ? "#628167" : "#d59350";
   elapsed = 0;
+  describeSituation();
 };
 $("#sound").onclick = () => {
   enabledSound = !enabledSound;
@@ -245,8 +249,7 @@ $("#report").onclick = () => {
     $("#report").disabled = false;
   });
 };
-$("#reset").onclick = () => {
-  state = createState();
+function clearActivity() {
   queue = [];
   elapsed = 0;
   activeAudio.forEach((a) => a.pause());
@@ -254,7 +257,8 @@ $("#reset").onclick = () => {
   document.querySelectorAll(".bubble,.pop").forEach((el) => el.remove());
   nodes.forEach((el) => {
     el.classList.remove("hit", "swing");
-    el.querySelector(".count").textContent = "0";
+    el.querySelector(".count").textContent =
+      state.hits[positions.findIndex((n) => nodes.get(n.id) === el)];
   });
   customer.disabled = false;
   customer.classList.remove("swing");
@@ -269,7 +273,47 @@ $("#reset").onclick = () => {
   $("#report-status").textContent = "Der Dienstweg ist offen. Theoretisch.";
   $("#quote").textContent = "„Wir geben das nur weiter.“";
   render();
+}
+$("#reset").onclick = () => {
+  state = createState();
+  clearActivity();
 };
+function automaticImpulse() {
+  const source = impulseSource(situation);
+  if (source === "customer") customerStrike();
+  else if (source === "banker") bankerStrike();
+  else {
+    const candidates = positions.filter((n) => n.level === source);
+    strike(candidates[Math.floor(Math.random() * candidates.length)]);
+  }
+}
+function describeSituation() {
+  $("#situation-status").textContent =
+    `${situation.label}: ${situation.description}${automatic ? "" : " Automatik pausiert – Start zum Beobachten."}`;
+  $(".workspace").dataset.situation = $("#speed").value;
+}
+$("#speed").addEventListener("change", () => {
+  situation = situations[$("#speed").value];
+  clearActivity();
+  describeSituation();
+  if (!automatic) return;
+  // A deliberate introductory impulse makes the selected scenario visible.
+  if ($("#speed").value === "quarter") {
+    const leads = positions.filter((n) => n.level === 2);
+    const lead = leads[Math.floor(Math.random() * leads.length)];
+    strike(lead, true);
+    say(lead, "Wir müssen alle liefern!");
+  } else if ($("#speed").value === "crisis") {
+    bankerStrike();
+    customerStrike();
+  } else {
+    const lead = positions.find((n) => n.level === 2);
+    animate(nodes.get(lead.id), "swing");
+    schedule(260, () => receive(children(lead)[Math.floor(Math.random() * 5)]));
+    say(lead, "Nur eine kleine Aufgabe.");
+  }
+});
+describeSituation();
 function frame(now) {
   const delta = Math.min(now - previous, 100);
   previous = now;
@@ -279,18 +323,9 @@ function frame(now) {
     const ready = queue.filter((e) => e.at <= clock);
     queue = queue.filter((e) => e.at > clock);
     ready.forEach((e) => e.fn());
-    if (automatic && elapsed >= Number($("#speed").value)) {
+    if (automatic && elapsed >= situation.interval) {
       elapsed = 0;
-      const r = Math.random();
-      if (r < 0.2) {
-        customerStrike();
-      } else if (r < 0.3) {
-        bankerStrike();
-      } else {
-        const level = r < 0.7 ? 0 : r < 0.9 ? 1 : 2;
-        const candidates = positions.filter((n) => n.level === level);
-        strike(candidates[Math.floor(Math.random() * candidates.length)]);
-      }
+      automaticImpulse();
     }
   }
   requestAnimationFrame(frame);

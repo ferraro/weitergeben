@@ -7,6 +7,8 @@ import {
   createState,
   totals,
   averages,
+  situations,
+  impulseSource,
 } from "./engine.js";
 test("Ein manueller Impuls von oben trifft 2, 4 und 20 Untergebene, niemals die Spitze", () => {
   const state = createState();
@@ -70,4 +72,47 @@ test("Durchschnitt pro Person berücksichtigt die Größe jeder Job-Kategorie", 
   });
   assert.deepEqual(averages(state), [9, 43.5, 53.5, 55.5]);
   assert.deepEqual(averages(createState()), [0, 0, 0, 0]);
+});
+
+test("Situationen verteilen Teamtreffer deutlich unterschiedlich", () => {
+  const lead = positions.find((n) => n.level === 2);
+  for (const [key, expected] of [
+    ["everyday", [80, 15, 5]],
+    ["quarter", [15, 15, 70]],
+    ["crisis", [20, 15, 65]],
+  ]) {
+    const bins = [0, 0, 0];
+    for (let i = 0; i < 100; i++) {
+      let first = true;
+      const targets = recipients(
+        lead,
+        false,
+        () => {
+          if (first) {
+            first = false;
+            return (i + 0.5) / 100;
+          }
+          return 0;
+        },
+        situations[key],
+      );
+      bins[targets.length === 1 ? 0 : targets.length === 5 ? 2 : 1]++;
+      assert.equal(new Set(targets).size, targets.length);
+    }
+    assert.deepEqual(bins, expected);
+    assert.equal(recipients(lead, true, () => 0, situations[key]).length, 5);
+  }
+});
+test("Krise erhöht externe Impulse, Quartalsendspurt fokussiert die Chefetage", () => {
+  for (const profile of Object.values(situations)) {
+    const counts = new Map();
+    for (let i = 0; i < 100; i++) {
+      const source = impulseSource(profile, () => (i + 0.5) / 100);
+      counts.set(source, (counts.get(source) || 0) + 1);
+    }
+    assert.deepEqual(
+      ["customer", "banker", 0, 1, 2].map((s) => counts.get(s)),
+      profile.sources.map((p) => Math.round(p * 100)),
+    );
+  }
 });

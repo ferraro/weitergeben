@@ -30,7 +30,7 @@
           <p class="eyebrow"><span></span> WILLKOMMEN IM ORGANIGRAMM</p>
           <h1>Weiter<span>geben.</span></h1>
           <p class="subtitle">
-            Oben eine Entscheidung.<br />Unten ein ganz normaler Montag.
+            Oben eine Entscheidung.<br />Unten kommt sie an.
           </p>
         </div>
         <div class="intro-note">
@@ -110,11 +110,11 @@
           <button id="auto" class="primary" aria-pressed="true">
             Ⅱ Automatik pausieren</button
           ><label class="speed"
-            >Drucklevel
+            >Betriebssituation
             <select id="speed">
-              <option value="3400">Montag</option>
-              <option value="1900" selected>Quartalsende</option>
-              <option value="850">Restrukturierung</option>
+              <option value="everyday" selected>Normaler Arbeitstag</option>
+              <option value="quarter">Quartalsendspurt</option>
+              <option value="crisis">Krisenmodus</option>
             </select></label
           >
         </div>
@@ -130,6 +130,7 @@
           </button>
         </div>
       </section>
+      <p id="situation-status" class="situation-status" role="status"></p>
       <section class="message">
         <span>↓</span>
         <p>
