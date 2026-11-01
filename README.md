@@ -24,6 +24,8 @@ Führungsstil und bezieht sich auf keine reale Person oder Organisation.
 - „Ton an“ aktiviert drei eigens mit ElevenLabs erzeugte Cartoon-Effekte.
 - ↺ setzt Treffer, laufende Kaskaden und Beschwerden zurück. Einstellungen bleiben.
 
+Die Statistik vergleicht Ø Bonks pro Person je Job-Kategorie (Treffersumme geteilt durch 1, 2, 4 bzw. 20 Personen). Die Balken verwenden diese Durchschnitte; der Gesamtzähler zählt weiterhin alle Treffer.
+
 ## Lokal starten
 
 Node.js 22 oder neuer, keine Installation und keine API-Schlüssel erforderlich:

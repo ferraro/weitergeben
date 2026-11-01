@@ -6,6 +6,7 @@ import {
   recipients,
   createState,
   totals,
+  averages,
 } from "./engine.js";
 test("Ein manueller Impuls von oben trifft 2, 4 und 20 Untergebene, niemals die Spitze", () => {
   const state = createState();
@@ -60,4 +61,13 @@ test("Automatische Mehrfachtreffer bleiben eindeutig und im eigenen Team", () =>
   assert.ok(targets.every((n) => children(lead).includes(n)));
   assert.equal(recipients(lead, true).length, 5);
   assert.deepEqual(recipients(positions.at(-1)), []);
+});
+
+test("Durchschnitt pro Person berücksichtigt die Größe jeder Job-Kategorie", () => {
+  const state = createState();
+  [9, 87, 214, 1110].forEach((sum, level) => {
+    state.hits[positions.findIndex((n) => n.level === level)] = sum;
+  });
+  assert.deepEqual(averages(state), [9, 43.5, 53.5, 55.5]);
+  assert.deepEqual(averages(createState()), [0, 0, 0, 0]);
 });

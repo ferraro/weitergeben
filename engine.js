@@ -50,3 +50,10 @@ export function recipients(node, broadcast = false, random = Math.random) {
   }
   return selected;
 }
+
+export function averages(state) {
+  return totals(state).map(
+    (sum, level) =>
+      sum / positions.filter((node) => node.level === level).length,
+  );
+}

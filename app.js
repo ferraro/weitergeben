@@ -5,6 +5,7 @@ import {
   recipients,
   createState,
   totals,
+  averages,
 } from "./engine.js";
 const $ = (s) => document.querySelector(s);
 let state = createState(),
@@ -132,7 +133,7 @@ function externalStrike(actor, target, label, phrases) {
 $("#stats").innerHTML = levels
   .map(
     (label, i) =>
-      `<div class="stat"><div class="stat-label"><span>${label}</span><strong id="stat-${i}">0</strong></div><div class="bar" style="--bar:${colors[i]}"><span id="bar-${i}"></span></div></div>`,
+      `<div class="stat"><div class="stat-label"><span>${label}</span><strong id="stat-${i}">0,00</strong></div><div class="bar" style="--bar:${colors[i]}"><span id="bar-${i}"></span></div></div>`,
   )
   .join("");
 for (const name of ["bonk", "complaint", "shredder"]) {
@@ -189,16 +190,20 @@ function receive(n, broadcast = false) {
   schedule(800, () => pop.remove());
   sound("bonk");
   render();
-  if (n.level < 3) schedule(440, () => strike(n, true));
+  if (n.level < 3) schedule(440, () => strike(n, broadcast));
 }
 function render() {
-  const sums = totals(state),
-    max = Math.max(1, ...sums);
+  const sums = totals(state);
+  const perPerson = averages(state);
+  const max = Math.max(...perPerson) || 1;
   $("#total").textContent = sums
     .reduce((a, b) => a + b, 0)
     .toLocaleString("de-DE");
-  sums.forEach((n, i) => {
-    $(`#stat-${i}`).textContent = n;
+  perPerson.forEach((n, i) => {
+    $(`#stat-${i}`).textContent = n.toLocaleString("de-DE", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
     $(`#bar-${i}`).style.width = `${(n / max) * 100}%`;
   });
 }
