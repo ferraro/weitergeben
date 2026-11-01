@@ -673,12 +673,12 @@ footer {
   }
 }
 
-/* Five people per team, arranged in two compact rows. */
+/* All team members share one hierarchy level. Scroll instead of wrapping. */
 .stage {
   height: 620px;
 }
 .team-member {
-  width: 6%;
+  width: 3.5%;
   height: 80px;
 }
 .team-member svg {
@@ -732,7 +732,7 @@ footer {
     font-size: 8px;
   }
   .team-member {
-    width: 6.5%;
+    width: 3.5%;
     height: 63px;
   }
   .team-member svg {
@@ -788,4 +788,35 @@ footer {
     top: 125px;
     right: 2%;
   }
+}
+
+.stage-scroll {
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+}
+.stage-scroll:focus-visible {
+  outline: 3px solid #ed683e;
+  outline-offset: -3px;
+}
+.stage-scroll .stage {
+  min-width: 1200px;
+  height: 560px;
+}
+.stage-scroll .team-member {
+  height: 80px;
+}
+.stage-scroll .team-member svg {
+  height: 64px;
+}
+.stage-scroll .team-member .name {
+  font-size: 7px;
+}
+.stage-scroll .t1 {
+  top: 26%;
+}
+.stage-scroll .t2 {
+  top: 51%;
+}
+.stage-scroll .t3 {
+  top: 76%;
 }

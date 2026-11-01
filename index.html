@@ -50,28 +50,36 @@
               <b id="mode-label">DER BETRIEB LÄUFT</b></span
             ><span>FIKTIVE FIRMA · ECHTES PRINZIP</span>
           </div>
-          <div class="stage" id="stage">
-            <svg
-              class="connections"
-              viewBox="0 0 800 580"
-              preserveAspectRatio="none"
-              aria-hidden="true"
-              id="connections"
-            ></svg>
-            <div class="tier-tag t0">STRATEGIE</div>
-            <div class="tier-tag t1">DELEGATION</div>
-            <div class="tier-tag t2">WEITERLEITUNG</div>
-            <div class="tier-tag t3">REALITÄT</div>
-            <div class="bin" title="Ablage für Feedback">
-              ▥<small>ABLAGE P</small>
+          <div
+            class="stage-scroll"
+            tabindex="0"
+            role="region"
+            aria-label="Organigramm, horizontal scrollbar"
+          >
+            <div class="stage" id="stage">
+              <svg
+                class="connections"
+                viewBox="0 0 800 580"
+                preserveAspectRatio="none"
+                aria-hidden="true"
+                id="connections"
+              ></svg>
+              <div class="tier-tag t0">STRATEGIE</div>
+              <div class="tier-tag t1">DELEGATION</div>
+              <div class="tier-tag t2">WEITERLEITUNG</div>
+              <div class="tier-tag t3">REALITÄT</div>
+              <div class="bin" title="Ablage für Feedback">
+                ▥<small>ABLAGE P</small>
+              </div>
+              <div id="complaint-paper" aria-hidden="true">✉</div>
             </div>
-            <div id="complaint-paper" aria-hidden="true">✉</div>
           </div>
           <p id="customer-status" class="customer-status" role="status">
             Druck von außen: Kunde → alle. Banker → nur Chef.
           </p>
           <div class="game-bottom">
-            <span>↖ Klicke auf eine Figur, um Druck weiterzugeben.</span
+            <span
+              >↖ Figur anklicken · ↔ Organigramm seitlich verschieben.</span
             ><span>4 Teams à 5. 0 Vorbilder.</span>
           </div>
         </section>

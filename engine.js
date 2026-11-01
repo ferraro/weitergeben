@@ -11,11 +11,9 @@ export const positions = Array.from({ length: 4 }, (_, level) =>
     index,
     x:
       level === 3
-        ? 20.75 +
-          Math.floor(index / 5) * 19.5 +
-          (((index % 5) % 3) - (index % 5 < 3 ? 1 : 0.5)) * 5.5
+        ? 20.75 + Math.floor(index / 5) * 19.5 + ((index % 5) - 2) * 3.6
         : 50 + (index - (2 ** level - 1) / 2) * (78 / 2 ** level),
-    y: level === 3 ? 73 + Math.floor((index % 5) / 3) * 13 : level * 25 + 1,
+    y: level * 25 + 1,
   })),
 ).flat();
 export function children(node) {
