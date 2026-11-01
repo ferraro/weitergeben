@@ -3,7 +3,7 @@
 **Oben eine Entscheidung. Unten ein ganz normaler Montag.**
 
 Eine kleine interaktive 2D-Bürosatire über **autoritären Managementstil**.
-15 Cartoon-Affen, vier Hierarchieebenen und ein sehr zuverlässiger Dienstweg
+27 Cartoon-Affen und ein Kunde, vier Hierarchieebenen und ein sehr zuverlässiger Dienstweg
 für Druck. Der Dienstweg für Beschwerden endet dagegen in **Ablage P**.
 
 Die Figuren und die Firma sind frei erfunden. Die Satire kritisiert einen
@@ -11,8 +11,10 @@ Führungsstil und bezieht sich auf keine reale Person oder Organisation.
 
 ## Spielen
 
-- Auf eine Figur klicken: Sie reicht Druck an zwei Untergebene weiter.
-- Die Kaskade läuft nach unten: Ein Impuls an der Spitze bewirkt 2, 4 und 8 Treffer.
+- Auf eine Figur klicken: Führungskräfte reichen Druck weiter; beim operativen Team endet die Kaskade.
+- Die Kaskade läuft nach unten: Ein Impuls an der Spitze bewirkt 2, 4 und 20 Treffer. Jeder der vier Teamleads führt fünf Teammitglieder.
+- Der Kunde steht außerhalb der Hierarchie. Beim Anklicken trifft er einen zufälligen Ansprechpartner, auch den Chef. Führungskräfte geben diesen Druck weiter.
+- Auch in der Automatik kommt gelegentlich Kundendruck hinzu.
 - Zufällige Impulse starten automatisch; die Automatik lässt sich pausieren.
   Bereits gestartete Kaskaden laufen dabei noch zu Ende.
 - Drei Drucklevel regeln die Häufigkeit: Montag, Quartalsende, Restrukturierung.

@@ -672,3 +672,81 @@ footer {
     transition: none !important;
   }
 }
+
+/* Five people per team, arranged in two compact rows. */
+.stage {
+  height: 620px;
+}
+.team-member {
+  width: 6%;
+  height: 80px;
+}
+.team-member svg {
+  height: 64px;
+}
+.team-member .name {
+  font-size: 7px;
+}
+.team-member .count {
+  font-size: 8px;
+  top: 0;
+}
+.customer {
+  left: 16%;
+  top: 1%;
+  width: 90px;
+}
+.customer .name {
+  color: #42658a;
+}
+.customer-hint {
+  display: block;
+  font-size: 9px;
+  color: #42658a;
+  margin-top: 5px;
+  white-space: nowrap;
+}
+.customer-status {
+  margin: 0;
+  padding: 12px 20px;
+  font-size: 11px;
+  color: #42658a;
+  background: #dce4e4;
+  min-height: 40px;
+}
+.connections .customer-pressure {
+  stroke: #527ea6;
+  stroke-width: 3;
+  stroke-dasharray: 8 5;
+}
+@media (max-width: 700px) {
+  .stage {
+    height: 560px;
+  }
+  .customer {
+    width: 56px;
+    left: 18%;
+  }
+  .customer-hint {
+    white-space: normal;
+    font-size: 8px;
+  }
+  .team-member {
+    width: 6.5%;
+    height: 63px;
+  }
+  .team-member svg {
+    height: 43px;
+  }
+  .team-member .name {
+    font-size: 6px;
+  }
+  .team-member .count {
+    font-size: 7px;
+    padding: 1px 3px;
+  }
+  .customer-status {
+    font-size: 10px;
+    padding: 10px;
+  }
+}
