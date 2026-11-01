@@ -12,6 +12,8 @@ reference recordings, or music samples were used. No API keys are needed to play
 
 Format: MP3, 44.1 kHz, 128 kbps. Provider: https://elevenlabs.io/
 
-The code's MIT license does not relicense these generated media files. Their
+The code's GPL-3.0-or-later license does not relicense these generated media files. Their
 provider terms apply: https://elevenlabs.io/terms-of-use . The game works without
 sound; replace or remove the MP3s to distribute a code-only version.
+
+See [repository licensing scope](../../LICENSING.md). These MP3 files are excluded from the GPL grant; this repository does not grant unrestricted redistribution or sublicensing rights to them.

@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "description": "Interaktive Cartoon-Satire über autoritären Managementstil",
-  "license": "MIT",
+  "license": "GPL-3.0-or-later",
   "scripts": {
     "start": "node server.js",
     "test": "node --test",

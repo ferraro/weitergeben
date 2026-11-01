@@ -71,7 +71,9 @@ keine realen Personen, Firmenlogos oder konkrete Arbeitgeber nachbilden.
 
 ## Lizenz und Medien
 
-Quellcode, SVG-Grafiken und Dokumentation: [MIT](LICENSE).
+Quellcode, selbst erstellte SVG-Grafiken und Dokumentation: [GNU GPL Version 3 oder neuer](LICENSE) (`GPL-3.0-or-later`). Details und Abgrenzung: [Lizenzumfang](LICENSING.md).
+
+**Die MP3-Dateien sind ausdrücklich nicht unter GPL freigegeben.** Ihre Weiterverteilungsrechte sind nicht als Open-Source-kompatibel geklärt. Das Repository ist daher kein vollständig frei lizenziertes Medienpaket. Insbesondere erlauben die aktuellen ElevenLabs-Sound-Effects-Bedingungen keine Bereitstellung isolierter Audiodateien; ein öffentlicher Repository-Download ist dadurch nicht automatisch abgedeckt. Bei Suno ist der für unseren Tool-Zugang geltende Tarif-/Downloadnachweis noch offen.
 Die mit ElevenLabs erzeugten Sounds sind gesondert dokumentiert:
 [Herkunft und Prompts](assets/audio/README.md).
 Musik: Suno, siehe [Musik-Herkunft und Prompts](assets/music/README.md).

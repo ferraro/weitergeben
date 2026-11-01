@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
+// Copyright (c) 2026 ferraro
 // Enabled by default; retry after user interaction if autoplay is blocked.
 export function createMusicPlayer(button, status, initialSituation) {
   const titles = {

@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
+// Copyright (c) 2026 ferraro
 import http from "node:http";
 import { readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";

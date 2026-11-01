@@ -27,4 +27,6 @@ The tracks are local files; playback requires no account or API key. They repeat
 
 ## Media terms
 
-The application's MIT license covers code, not these generated media files. Suno's applicable terms govern the generated music: https://suno.com/terms . Generation provenance is recorded here; no independent open-content license is asserted for the MP3s. For a code-only distribution, omit the music assets or replace them with tracks you license separately.
+The application's GPL-3.0-or-later license covers code, not these generated media files. Suno's applicable terms govern the generated music: https://suno.com/terms . Generation provenance is recorded here; no independent open-content license is asserted for the MP3s. For a code-only distribution, omit the music assets or replace them with tracks you license separately.
+
+See [repository licensing scope](../../LICENSING.md). These MP3 files are excluded from the GPL grant; this repository does not grant unrestricted redistribution or sublicensing rights to them.
